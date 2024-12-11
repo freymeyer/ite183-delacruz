@@ -1,0 +1,158 @@
+/* static/css/main.css */
+
+/* Typography and Base Styles */
+body {
+    font-family: 'Roboto', sans-serif;
+    background-image: url('https://images7.alphacoders.com/131/thumb-1920-1311659.png');
+    background-size: cover;
+    background-attachment: fixed;
+    background-position: center;
+    backdrop-filter: brightness(0.6) blur(5px);
+}
+
+/* Button Styles */
+.btn-add-list {
+    background: linear-gradient(45deg, #8A4FFF, #6A1B9A);
+    border: none;
+    color: white;
+    font-weight: bold;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn-add-list:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(138,79,255,0.4);
+    background: linear-gradient(45deg, #6A1B9A, #8A4FFF);
+}
+
+/* Manga Genres */
+.manga-genres {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.genre-tag {
+    background-color: rgba(138, 79, 255, 0.2);
+    color: #a87dff;
+    padding: 2px 8px;
+    border-radius: 15px;
+    font-size: 0.7rem;
+    margin: 0 3px;
+}
+
+/* Container Styles */
+.search-container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container {
+    border-radius: 15px;
+    padding: 20px;
+    backdrop-filter: blur(10px);
+}
+
+/* Card Styles */
+.card {
+    background-color: rgba(53, 53, 53, 0.29);
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.rank-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(138, 79, 255, 0.8);
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Navbar Styles */
+.navbar {
+    background: linear-gradient(90deg, rgba(30,30,30,0.8) 0%, rgba(50,50,50,0.8) 100%) !important;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.navbar-brand {
+    color: #8A4FFF !important;
+    font-weight: bold;
+    font-size: 1.5rem;
+    transition: transform 0.3s;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(249, 86, 255, 0.5);
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: white;
+    font-size: 1rem;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.navbar-nav .nav-item .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 50%;
+    background-color: #8A4FFF;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #8A4FFF;
+}
+
+.navbar-nav .nav-item .nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
+.navbar-toggler {
+    border-color: #8A4FFF;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%237a00d7' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+/* Pagination Styles */
+.pagination .page-link {
+    background-color: rgba(30, 30, 30, 0.8);
+    color: #8A4FFF;
+    border: none;
+}
+
+.pagination .page-item.active .page-link {
+    background-color: #8A4FFF;
+    color: white;
+}
+
+/* Info Container Styles */
+.info-container {
+    background-color: rgba(20, 20, 20, 0.9) !important;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}

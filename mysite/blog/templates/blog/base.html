@@ -1,0 +1,131 @@
+<header>
+  <nav class="navbar is-dark is-spaced" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/posts/">
+        <span class="has-text-weight-bold">HOME</span>
+      </a>
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div id="navbarBasicExample" class="navbar-menu">
+      <div class="navbar-end">
+        <a class="navbar-item" href="/posts/create/">
+          <span class="has-text-weight-bold">NEW LIST</span> 
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+</main>
+
+<style>
+  /* Body styling for a more elegant, cozy feel */
+  body {
+    font-family: 'Quicksand', sans-serif; /* Friendly, rounded font */
+    background-color: #f7f1e5; /* Soft cream background for warmth */
+    color: #4a403a; /* Warm, earthy brown text */
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Navbar styling for a modern café look */
+  .navbar {
+    background-color: #5b3a29; /* Rich, coffee-brown navbar */
+    padding: 1rem; /* Increase navbar padding for better spacing */
+  }
+
+  .navbar-item {
+    font-size: 1.2rem;
+    color: #f2e9e4; /* Soft cream text color */
+    padding: 0.75em 1.25em; /* Increase padding for comfortable interaction */
+    text-transform: uppercase; /* Add a subtle text style for emphasis */
+    font-weight: 600;
+  }
+
+  .navbar-item:hover {
+    background-color: #805b45; /* Lighter shade of brown on hover */
+  }
+
+  /* Main content area */
+  main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 40px;
+    background-color: #fff8f0; /* Soft, off-white background for contrast */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Deep shadow for visual depth */
+    border-radius: 10px; /* Slightly more rounded corners for comfort */
+  }
+
+  h1, h2, h3 {
+    font-family: 'Merriweather', serif; /* Elegant serif font for headings */
+    color: #5b3a29; /* Warm, inviting brown for headings */
+  }
+
+  h1 {
+    font-size: 2.5rem; /* Larger, more impactful font size */
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #4a403a;
+    margin-bottom: 1.5em; /* More spacing between paragraphs */
+  }
+
+  /* Refined button styles for a modern, inviting feel */
+  .button {
+    background-color: #d4a373; /* Soft, inviting golden hue */
+    border: none;
+    color: #fff;
+    border-radius: 6px; /* Slightly more rounded corners */
+    padding: 0.75em 1.5em; /* Increase padding for comfort */
+    font-weight: 600;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .button:hover {
+    background-color: #a67c52; /* Darker gold on hover for visual feedback */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow on hover */
+  }
+
+  .button:active {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Deeper shadow on click */
+  }
+
+  /* Typography for link elements inside buttons */
+  a.button {
+    text-transform: uppercase;
+    font-size: 1rem;
+  }
+
+  /* Subtle background texture for added warmth */
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('https://www.transparenttextures.com/patterns/white-waves.png');
+    opacity: 0.05; /* Very light texture to maintain subtlety */
+    z-index: -1;
+  }
+
+  /* Utility classes for extra styling flexibility */
+  .is-cozy {
+    padding: 1.5rem;
+    background-color: #fbf5f2; /* Soft, off-white with warmth */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Gentle shadow */
+  }
+</style>

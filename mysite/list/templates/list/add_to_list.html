@@ -1,0 +1,13 @@
+<h1>Add to List</h1>
+
+<form method="get" action="{% url 'add_to_list' %}">
+<div class="form-group">
+<label for="manga_id">Manga ID:</label>
+<input type="text" class="form-control" id="manga_id" name="manga_id" required>
+</div>
+<button type="submit" class="btn btn-primary">Add to List</button>
+</form>
+
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}

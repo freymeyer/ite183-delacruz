@@ -1,0 +1,21 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+>
+
+<section class="section">
+  <div class="container">
+    <div class="box">
+      <h1 class="title">{{ blog_detail.title }}</h1> 
+      <p class="subtitle is-6">Posted on: {{ blog_detail.date_created }}</p> <div class="content">
+        {{ blog_detail.content }}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

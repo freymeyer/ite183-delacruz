@@ -1,0 +1,125 @@
+<style>
+  /* Set up the grid for responsiveness */
+  .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-gap: 20px;
+  }
+
+  /* Style for individual cells (cards) */
+  .cell {
+      border: 1px solid #e2d4c3; /* Soft warm border */
+      padding: 20px;
+      border-radius: 8px; /* Softer corners for coziness */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+      background-color: #fff8f0; /* Warm off-white background */
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .cell:hover {
+      transform: translateY(-5px); /* Slight lift on hover */
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); /* Deeper shadow on hover */
+  }
+
+  /* General body styling */
+  body {
+      font-family: 'Quicksand', sans-serif;
+      background-color: #f4ede4; /* Light cream background */
+      color: #5e503f; /* Warm brown text */
+  }
+
+  h1.title {
+      font-family: 'Merriweather', serif; /* Elegant font for title */
+      color: #6b4226; /* Coffee brown */
+      margin-bottom: 20px;
+  }
+
+  h2.title {
+      font-family: 'Merriweather', serif;
+      color: #6b4226;
+      margin-bottom: 10px;
+  }
+
+  p {
+      line-height: 1.7;
+      color: #5e503f; /* Warm brown text */
+  }
+
+  /* Card content styling */
+  .card {
+      background-color: #fff8f0; /* Warm off-white */
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+  }
+
+  .card-content {
+      padding: 20px;
+  }
+
+  /* Footer styling for edit/delete buttons */
+  .card-footer {
+      background-color: #f4ede4; /* Light cream color for footer */
+      border-top: none;
+  }
+
+  .card-footer-item {
+      background-color: #d4a373; /* Soft golden hue */
+      border-radius: 5px;
+      color: white;
+      font-weight: bold;
+      padding: 0.5em 1em;
+      transition: background-color 0.3s ease;
+  }
+
+  .card-footer-item:hover {
+      background-color: #a67c52; /* Darker gold on hover */
+  }
+
+  .button.is-danger {
+      background-color: #d9534f;
+  }
+
+  /* Subtle texture for the entire background */
+  body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-image: url('https://www.transparenttextures.com/patterns/linen.png');
+      opacity: 0.05; /* Subtle texture to resemble café walls */
+      z-index: -1;
+  }
+</style>
+
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+/>
+<h1 class="title is-1">My Blog List</h1>
+
+<div class="columns is-multiline">
+  {% for list in blog_list %}
+  <div class="column is-one-third">
+    <div class="card">
+      <div class="card-content">
+        <div class="content">
+          <h2 class="title is-4">
+            <a href='{{list.id}}' class="has-text-dark">{{list.title}}</a>
+          </h2>
+          <p>{{ list.content }}</p>
+        </div>
+      </div>
+      <footer class="card-footer">
+        <a href='{{list.id}}/update/' class="card-footer-item button is-primary">Edit</a>
+        <a href='{{list.id}}/delete/' class="card-footer-item button is-danger">Delete</a>
+      </footer>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

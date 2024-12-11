@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>My Manga List</h2>
+    
+    <div class="mb-3">
+        <a href="{% url 'manga_list' %}" class="btn btn-primary">Browse Manga</a>
+    </div>
+
+    {% if reading_lists %}
+        <div class="row row-cols-1 row-cols-md-3 g-4">
+            {% for entry in reading_lists %}
+            <div class="col">
+                <div class="card h-100">
+                    <img src="{{ entry.manga_image_url }}" class="card-img-top" alt="{{ entry.manga_title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ entry.manga_title }}</h5>
+                        <p class="card-text">
+                            <strong>Status:</strong> {{ entry.reading_status }}<br>
+                            <strong>Chapters Read:</strong> {{ entry.num_chapters_read }}<br>
+                            <strong>Volumes Read:</strong> {{ entry.num_volumes_read }} <br>
+                            <strong>My Rating:</strong> {{ entry.user_rating }}
+                        </p>
+                        <div class="d-flex justify-content-between">
+                            <a href="{% url 'update_manga_entry' entry.id %}" class="btn btn-secondary">Update Entry</a>
+                            <a href="{% url 'delete_manga_entry' entry.id %}" 
+                               class="btn btn-danger"
+                               onclick="return confirm('Are you sure you want to remove this manga from your list?');">
+                                Remove
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>You haven't added any manga to your list yet.</p>
+    {% endif %}
+</div>
+{% endblock %}

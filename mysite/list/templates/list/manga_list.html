@@ -1,0 +1,139 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div>
+    <div class="container">
+        <div class="container search-container">
+            <form class="d-flex" role="search" action="" method="get">
+                <input class="form-control me-2" 
+                       type="search" 
+                       placeholder="Search" 
+                       aria-label="Search" 
+                       name="query" 
+                       value="{{ query }}">
+                <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+        </div>
+        
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 justify-content-center">
+            {% for item in mangas %}
+            <div class="col position-relative">
+                <div class="card h-100 manga-item">
+                    {% if item.node.main_picture %}
+                        <div class="rank-badge">{{ item.node.rank }}</div>
+                        <img src="{{ item.node.main_picture.medium }}" class="card-img-top img-fluid" alt="{{ item.node.title }}">
+                    {% else %}
+                        <div class="rank-badge">{{ item.node.rank }}</div>
+                        <img src="{% static 'images/default_manga.png' %}" class="card-img-top img-fluid" alt="No image">
+                    {% endif %}
+                    <div class="card-body">
+                        <div class="d-flex justify-content-center mb-3"> 
+                            {% if user.is_authenticated %}
+                            <a href="{% url 'add_to_list' %}?manga_id={{ item.node.id }}" class="btn btn-add-list btn-sm">Add to List</a>
+                            {% else %}
+                            <a href="{% url 'login' %}" class="btn btn-add-list btn-sm">Login to Add</a>
+                            {% endif %}
+                        </div>
+                        <h5 class="card-title text-center">{{ item.node.title }}</h5>
+                        <div class="manga-genres">
+                            {% if item.node.genres %}
+                                {% for genre in item.node.genres %}
+                                    <span class="genre-tag">{{ genre.name }}</span>
+                                {% endfor %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                <!-- Hover Container -->
+                <div class="info-container bg-dark text-white p-3 position-absolute" style="display: none; z-index: 10; width: 500px;">
+                    {% if item.node.alternative_titles.en and item.node.title != item.node.alternative_titles.en %}
+                        <p class="card-text text-muted">({{ item.node.alternative_titles.en }})</p>
+                    {% endif %}
+                    {% if item.node.num_chapters != 0 %}
+                        <p class="card-text"><strong>Chapters:</strong> {{ item.node.num_chapters }}</p>
+                    {% endif %}
+                    {% if item.node.synopsis %}
+                        <p><strong>Synopsis:</strong> {{ item.node.synopsis }}</p>
+                    {% else %}
+                        <p><strong>Synopsis:</strong> Not available</p>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <nav aria-label="Page navigation" class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <!-- Previous Button -->
+                    <li class="page-item {% if not has_previous %}disabled{% endif %}">
+                        <a class="page-link" href="?page={{ current_page|add:-1 }}&query={{ query }}" 
+                           aria-label="Previous" {% if not has_previous %}tabindex="-1"{% endif %}>
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                
+                    <!-- Page Numbers -->
+                    {% for page in pages %}
+                    <li class="page-item {% if page == current_page %}active{% endif %}">
+                        <a class="page-link" href="?page={{ page }}&query={{ query }}">{{ page }}</a>
+                    </li>
+                    {% endfor %}
+                
+                    <!-- Next Button -->
+                    <li class="page-item {% if not has_next %}disabled{% endif %}">
+                        <a class="page-link" href="?page={{ current_page|add:1 }}&query={{ query }}" 
+                           aria-label="Next" {% if not has_next %}tabindex="-1"{% endif %}>
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const mangaItems = document.querySelectorAll(".manga-item");
+        mangaItems.forEach(item => {
+            const infoContainer = item.nextElementSibling;
+
+            item.addEventListener("mouseenter", () => {
+                // Make the container visible
+                infoContainer.style.display = "block";
+
+                // Get the bounding box of the item
+                const itemRect = item.getBoundingClientRect();
+                const containerWidth = infoContainer.offsetWidth;
+                const viewportWidth = window.innerWidth;
+
+                // Check if there's enough space on the right
+                if (itemRect.right + containerWidth > viewportWidth) {
+                    // Place the container on the left
+                    infoContainer.style.right = "auto";
+                    infoContainer.style.left = "-500px";
+                } else {
+                    // Place the container on the right
+                    infoContainer.style.left = "auto";
+                    infoContainer.style.right = "-500px";
+                }
+
+                // Align vertically with the top of the card
+                infoContainer.style.top = "0";
+            });
+
+            item.addEventListener("mouseleave", () => {
+                // Hide the container
+                infoContainer.style.display = "none";
+            });
+        });
+    });
+</script>
+{% endblock %}
